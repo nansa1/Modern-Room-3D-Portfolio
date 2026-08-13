@@ -1,4 +1,4 @@
-import { useState, type JSX } from 'react'
+import { useEffect, useState, type JSX } from 'react'
 import type { SectionId, CertEntry } from '../types'
 import { profile, projects, skillGroups, experience, education, certifications } from '../data/content'
 
@@ -166,6 +166,66 @@ function EducationContent() {
   )
 }
 
+/**
+ * Real LinkedIn "Profile Badge" embed (platform.linkedin.com/badges/js) —
+ * moved here from Room.tsx. It's a script-injected iframe, which only
+ * lays out correctly in normal document flow; it broke (huge, unstyled,
+ * blurry) when rendered inside Room.tsx's <Html transform> 3D node,
+ * because Chromium's iframe layout loses its own CSS under a matrix3d
+ * transform. This panel is plain flat DOM, so the badge renders as
+ * LinkedIn intends. Falls back to a plain link if the badge iframe never
+ * loads (offline, ad-blocker, or the LinkedIn "Profile badge" privacy
+ * setting is off) so Contact never shows a dead space.
+ */
+function LinkedInBadge() {
+  const [scriptFailed, setScriptFailed] = useState(false)
+
+  useEffect(() => {
+    if (document.getElementById('linkedin-badge-script')) return
+    const script = document.createElement('script')
+    script.id = 'linkedin-badge-script'
+    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
+    script.async = true
+    script.defer = true
+    script.onerror = () => setScriptFailed(true)
+    document.body.appendChild(script)
+  }, [])
+
+  if (scriptFailed) {
+    return (
+      <a
+        href={profile.links.linkedin}
+        target="_blank"
+        rel="noreferrer"
+        className="block text-command-text-dim text-xs hover:text-command-accent transition-colors"
+      >
+        {profile.links.linkedin}
+      </a>
+    )
+  }
+
+  return (
+    <div
+      className="badge-base LI-profile-badge"
+      data-locale="en_US"
+      data-size="large"
+      data-theme="dark"
+      data-type="VERTICAL"
+      data-vanity="adnan-saliyawala-725974141"
+      data-version="v1"
+    >
+      <a
+        className="badge-base__link LI-simple-link"
+        href="https://in.linkedin.com/in/adnan-saliyawala-725974141?trk=profile-badge"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Adnan Saliyawala
+      </a>
+    </div>
+  )
+}
+
 function ContactContent() {
   return (
     <div>
@@ -175,13 +235,19 @@ function ContactContent() {
           {profile.links.email}
         </a>
         <p className="text-command-text-dim">{profile.links.phone}</p>
-        <p className="text-command-text-dim text-xs mt-4">
-          {profile.links.linkedin}
-          <br />
+      </div>
+
+      <div className="mt-6">
+        <LinkedInBadge />
+      </div>
+
+      <div className="mt-4 space-y-1 text-xs">
+        <a href={profile.links.github} target="_blank" rel="noreferrer" className="block text-command-text-dim hover:text-command-accent transition-colors">
           {profile.links.github}
-          <br />
+        </a>
+        <a href={profile.links.leetcode} target="_blank" rel="noreferrer" className="block text-command-text-dim hover:text-command-accent transition-colors">
           {profile.links.leetcode}
-        </p>
+        </a>
       </div>
     </div>
   )
