@@ -4,15 +4,176 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Adnan Saliyawala — Command Center Portfolio</title>
+    <title>Adnan Saliyawala — Software Engineer | NetFlow, SNMP Network Monitoring &amp; Backend Development</title>
+
+    <!-- Core SEO -->
+    <meta
+      name="description"
+      content="Adnan Saliyawala is a software engineer building NetFlow analytics (FlowZynth) and SNMP-based network performance monitoring (NetPulse NPM) systems, with Java Spring Boot, Python FastAPI, ML anomaly detection, and network security backend development."
+    />
+    <meta
+      name="keywords"
+      content="Adnan Saliyawala, NetFlow, NetFlow analytics, SNMP network monitoring, NPM network performance monitoring, network security engineer, Spring Boot developer, FastAPI developer, ML anomaly detection, network monitoring software engineer, Godhra software engineer, Netziya"
+    />
+    <link rel="canonical" href="https://adnansaliyawala.in/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Adnan Saliyawala" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://adnansaliyawala.in/" />
+    <meta property="og:title" content="Adnan Saliyawala — Software Engineer | NetFlow &amp; Network Monitoring Systems" />
+    <meta
+      property="og:description"
+      content="Software engineer building NetFlow analytics and SNMP-based network performance monitoring systems. Java Spring Boot, Python FastAPI, ML anomaly detection, network security."
+    />
+    <meta property="og:image" content="https://adnansaliyawala.in/dashboards/flowzynth-dashboard.jpg" />
+    <meta property="profile:first_name" content="Adnan" />
+    <meta property="profile:last_name" content="Saliyawala" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Adnan Saliyawala — Software Engineer | NetFlow &amp; Network Monitoring" />
+    <meta
+      name="twitter:description"
+      content="Software engineer building NetFlow analytics and SNMP-based network performance monitoring systems."
+    />
+    <meta name="twitter:image" content="https://adnansaliyawala.in/dashboards/flowzynth-dashboard.jpg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured data: tells Google exactly who you are, separate from LinkedIn's copy -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Adnan Saliyawala",
+        "url": "https://adnansaliyawala.in/",
+        "jobTitle": "Software Engineer — Backend, ML & Network Security Systems",
+        "description": "Software engineer building NetFlow analytics and SNMP-based network performance monitoring systems, with backend, ML, and network security expertise.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Godhra",
+          "addressRegion": "Gujarat",
+          "addressCountry": "IN"
+        },
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Netziya Pvt Ltd"
+        },
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "Parul University" },
+          { "@type": "CollegeOrUniversity", "name": "Navrachana University" }
+        ],
+        "knowsAbout": [
+          "NetFlow",
+          "NetFlow analytics",
+          "SNMP network monitoring",
+          "Network performance monitoring (NPM)",
+          "Network security",
+          "Machine learning anomaly detection",
+          "Java",
+          "Spring Boot",
+          "Python",
+          "FastAPI",
+          "ClickHouse",
+          "React",
+          "TypeScript"
+        ],
+        "sameAs": [
+          "https://www.linkedin.com/in/adnan-saliyawala/",
+          "https://github.com/nansa1",
+          "https://leetcode.com/u/pjvKRUIvCZ/"
+        ]
+      }
+    </script>
   </head>
   <body>
+    <!--
+      This block is real HTML present before any JavaScript runs, so search
+      engines and link previews always have text to read — the 3D scene
+      below only reveals its content on click and can't be relied on for
+      indexing. Visually hidden (sr-only) but present in the DOM/accessibility
+      tree; keep it in sync with src/data/content.ts.
+    -->
+    <div id="seo-content" class="sr-only">
+      <h1>Adnan Saliyawala — Software Engineer, Backend, ML &amp; Network Security Systems</h1>
+      <p>
+        Adnan Saliyawala is a software engineer based in Godhra, Gujarat, India, building backend
+        systems with Spring Boot and FastAPI and applying machine learning (Isolation Forest, Random
+        Forest, KMeans) for anomaly detection in network security contexts.
+      </p>
+
+      <h2>Projects</h2>
+      <article>
+        <h3>FlowZynth — Enterprise NetFlow analytics &amp; security monitoring platform</h3>
+        <p>
+          Led end-to-end design and development of a NetFlow analytics platform processing 1M+ flow
+          records per minute, with a dual-database architecture (ClickHouse + SQLite) for sub-second
+          analytics across 50M+ records a day, enterprise auth (SSO, LDAP, RBAC) for 1,000+
+          multi-tenant users, and an automated ML anomaly-detection pipeline (92%+ accuracy).
+          Packaged as a one-click OVA appliance for VirtualBox and VMware.
+        </p>
+      </article>
+      <article>
+        <h3>NetPulse NPM — SNMP-based network performance monitoring</h3>
+        <p>
+          Leading this network performance monitoring (NPM) prototype: polling interface stats, LLDP
+          neighbors, ARP tables, and routing protocols (BGP/OSPF) across network devices, with a
+          FastAPI/SQLAlchemy backend and a React + TypeScript frontend.
+        </p>
+      </article>
+      <article>
+        <h3>Netziya Agent — Cross-platform EDR telemetry agent</h3>
+        <p>
+          Built an EDR agent collecting DNS, process, filesystem, USB, Windows Event Log and
+          system-info telemetry, then ported it from Windows to Linux (Ubuntu 18.04–24.04) while
+          preserving ClickHouse schema compatibility, with cursor-based infinite scroll for
+          million-row telemetry views.
+        </p>
+      </article>
+      <article>
+        <h3>Aara-V2 — Full-stack e-commerce platform</h3>
+        <p>
+          Personal project with 20+ functional modules, a Java/Spring Boot backend and Angular
+          frontend, 25+ REST endpoints, JWT auth, and latency reduced from 800ms to 200ms through
+          database optimization and load balancing.
+        </p>
+      </article>
+
+      <h2>Skills</h2>
+      <p>
+        Java, Python, TypeScript, JavaScript, SQL, Spring Boot, FastAPI, Angular, React, Tailwind
+        CSS, MySQL, ClickHouse, Firebase, SQLite, Docker, Git, NetFlow, SNMP network monitoring,
+        network performance monitoring, Isolation Forest, Random Forest, KMeans.
+      </p>
+
+      <h2>Experience</h2>
+      <p>
+        Software Engineer — Product Development, FlowZynth Project Lead, NETZIYA Pvt Ltd, Godhra
+        (Jul 2025–Present). Software Development Intern, AccioJob Pvt Ltd, Vadodara (Oct 2024–Apr
+        2025). Trainee Android Developer, Shree Drashti Infotech LLP (Jan 2022–Apr 2022).
+      </p>
+
+      <h2>Education</h2>
+      <p>
+        M.C.A. — Cloud Computing, Parul University (2023–2025). B.C.A., Navrachana University,
+        Vadodara (2019–2022).
+      </p>
+
+      <p>
+        <a href="https://www.linkedin.com/in/adnan-saliyawala/">LinkedIn</a> ·
+        <a href="https://github.com/nansa1">GitHub</a> ·
+        <a href="https://leetcode.com/u/pjvKRUIvCZ/">LeetCode</a> ·
+        <a href="/resume.pdf">Resume</a>
+      </p>
+    </div>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
