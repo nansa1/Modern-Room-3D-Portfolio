@@ -209,7 +209,7 @@ function LinkedInBadge() {
       className="badge-base LI-profile-badge"
       data-locale="en_US"
       data-size="large"
-      data-theme="dark"
+      data-theme="light"
       data-type="VERTICAL"
       data-vanity="adnan-saliyawala-725974141"
       data-version="v1"
@@ -237,10 +237,6 @@ function ContactContent() {
         <p className="text-command-text-dim">{profile.links.phone}</p>
       </div>
 
-      <div className="mt-6">
-        <LinkedInBadge />
-      </div>
-
       <div className="mt-4 space-y-1 text-xs">
         <a href={profile.links.github} target="_blank" rel="noreferrer" className="block text-command-text-dim hover:text-command-accent transition-colors">
           {profile.links.github}
@@ -248,6 +244,10 @@ function ContactContent() {
         <a href={profile.links.leetcode} target="_blank" rel="noreferrer" className="block text-command-text-dim hover:text-command-accent transition-colors">
           {profile.links.leetcode}
         </a>
+      </div>
+
+      <div className="mt-6">
+        <LinkedInBadge />
       </div>
     </div>
   )
