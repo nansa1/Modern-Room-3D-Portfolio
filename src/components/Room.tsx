@@ -57,46 +57,6 @@ type Clickable = { label: string; onSelect: () => void; isActive?: boolean }
  * VideoTexture defaults to true, which would show the clip upside down).
  */
 
-function LinkedInBadge() {
-  useEffect(() => {
-    if (document.getElementById('linkedin-badge-script')) return
-
-    const script = document.createElement('script')
-    script.id = 'linkedin-badge-script'
-    script.src = 'https://platform.linkedin.com/badges/js/profile.js'
-    script.async = true
-    script.defer = true
-    document.body.appendChild(script)
-  }, [])
-
-  return (
-    <Html
-      position={[0.48, 1.35, -1.2]} // near your contact/computer tower
-      transform
-      distanceFactor={1.5}
-      occlude={false}
-    >
-      <div
-        className="badge-base LI-profile-badge"
-        data-locale="en_US"
-        data-size="large"
-        data-theme="dark"
-        data-type="VERTICAL"
-        data-vanity="adnan-saliyawala-725974141"
-        data-version="v1"
-      >
-        <a
-          className="badge-base__link LI-simple-link"
-          href="https://in.linkedin.com/in/adnan-saliyawala-725974141?trk=profile-badge"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Adnan Saliyawala
-        </a>
-      </div>
-    </Html>
-  )
-}
 
 function useVideoTexture(src: string): THREE.VideoTexture | null {
   const [texture, setTexture] = useState<THREE.VideoTexture | null>(null)
@@ -528,9 +488,6 @@ export default function Room({
       {/* Computer tower — back wall, under the shelf */}
       <Hotspot center={[0.476, 1.013, -1.45]} size={[0.2, 0.5, 0.42]} label="Contact" clickable={sel('contact')} />
       
-      {/* LinkedIn badge appears when Contact is active */}
-      {activeSection === 'contact' && <LinkedInBadge />}
-
       {/*
         3 Artwork Frame objects, back wall — all open Education. Each frame
         already shows its own cert image (see the texture-swap effect
