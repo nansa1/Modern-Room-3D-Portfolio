@@ -35,8 +35,16 @@ Designed for developers who want a unique portfolio experience that feels more l
 ```text
 portfolio-3d/
 ├── public/
-│   ├── models/          # All 3D models (.glb)
-│   └── resume.pdf       # Downloadable resume
+│   ├── models/           # All 3D models (.glb)
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── favicon-96x96.png
+│   ├── apple-touch-icon.png
+│   ├── site.webmanifest
+│   ├── robots.txt        # Tells crawlers which pages they can index
+│   ├── sitemap.xml       # Lists your pages for search engines
+│   └── resume.pdf        # Downloadable resume
+├── index.html            # SEO meta tags, favicon links, structured data
 ├── src/
 │   ├── components/      # 3D scene components
 │   ├── data/
@@ -151,13 +159,159 @@ Edit:
 src/App.tsx
 ```
 
-Replace:
+Replace the placeholder name shown in the command-center header with your own name.
 
-```tsx
-Adnan Saliyawala — Command Center
+---
+
+# Update `index.html` for SEO and Favicon
+
+The root `index.html` file controls what search engines and social media previews show for your site — page title, description, keywords, social preview images, and the favicon (the small icon shown in browser tabs and search results). This is **separate from `content.ts`**, since `content.ts` only controls what's rendered inside the 3D scene itself, not the raw HTML that crawlers read before your JavaScript runs.
+
+Open `index.html` in your project root and update the following sections:
+
+## 1. Basic page info
+
+```html
+<title>[Your Name] — [Your Title] | [Key Skills/Keywords]</title>
 ```
 
-with your own name.
+Keep it under ~60 characters where possible so it doesn't get truncated in search results.
+
+## 2. Meta description and keywords
+
+```html
+<meta
+  name="description"
+  content="[1-2 sentence summary of who you are and what you build, written for humans, ~150-160 characters]"
+/>
+<meta
+  name="keywords"
+  content="[Your Name], [skill 1], [skill 2], [role/title], [location], [company name]"
+/>
+```
+
+## 3. Canonical URL
+
+```html
+<link rel="canonical" href="https://[yourdomain.com]/" />
+```
+
+Update this to your actual deployed domain — it tells search engines which URL is the "official" one if your site is reachable at multiple addresses (e.g. with and without `www`).
+
+## 4. Open Graph and Twitter card (social preview)
+
+```html
+<meta property="og:url" content="https://[yourdomain.com]/" />
+<meta property="og:title" content="[Your Name] — [Your Title]" />
+<meta property="og:description" content="[Short description]" />
+<meta property="og:image" content="https://[yourdomain.com]/[path-to-preview-image.jpg]" />
+
+<meta name="twitter:title" content="[Your Name] — [Your Title]" />
+<meta name="twitter:description" content="[Short description]" />
+<meta name="twitter:image" content="https://[yourdomain.com]/[path-to-preview-image.jpg]" />
+```
+
+This is what shows up when your link is shared on LinkedIn, Twitter/X, Discord, WhatsApp, etc. Use a real screenshot or graphic from your `public/` folder — ideally 1200×630px.
+
+## 5. Structured data (JSON-LD)
+
+This block helps Google understand who you are independently of what's written elsewhere on the web:
+
+```html
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "[Your Name]",
+    "url": "https://[yourdomain.com]/",
+    "jobTitle": "[Your Job Title]",
+    "description": "[Short description]",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "[Your City]",
+      "addressRegion": "[Your State/Region]",
+      "addressCountry": "[Your Country Code]"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "[Your Company]"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/in/[your-linkedin]/",
+      "https://github.com/[your-github]",
+      "[any other profile URL]"
+    ]
+  }
+</script>
+```
+
+Replace every bracketed value with your own details, or remove fields (like `worksFor`) that don't apply to you.
+
+## 6. Hidden SEO content block
+
+Since the 3D scene only reveals content on click and can't be reliably crawled, the `<div id="seo-content" class="sr-only">` block right before `<div id="root">` holds real, always-present HTML text for search engines to read. Update the headings, project descriptions, skills, experience, and education inside this block to match your own content — keep it in sync with `content.ts` so both sources agree.
+
+---
+
+# Add Your Own Favicon and Logo
+
+1. **Create your icon files.** Use a tool like [realfavicongenerator.net](https://realfavicongenerator.net) — upload a square version of your logo and it will generate all required sizes and formats for you (`.ico`, `.svg`, `.png`, `site.webmanifest`).
+
+2. **Place the generated files in `public/`:**
+
+   ```text
+   public/
+   ├── favicon.ico
+   ├── favicon.svg
+   ├── favicon-96x96.png
+   ├── apple-touch-icon.png
+   └── site.webmanifest
+   ```
+
+3. **Reference them in `index.html`** (Vite serves everything in `public/` from the site root — do **not** use `%PUBLIC_URL%`, that placeholder only works in Create React App projects):
+
+   ```html
+   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+   <link rel="shortcut icon" href="/favicon.ico" />
+   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+   <meta name="apple-mobile-web-app-title" content="[Your Name]" />
+   <link rel="manifest" href="/site.webmanifest" />
+   ```
+
+4. **Deploy, then verify** by visiting `https://[yourdomain.com]/favicon.svg` and `https://[yourdomain.com]/favicon-96x96.png` directly in your browser — you should see your logo, not a 404.
+
+5. **Request re-indexing.** Search engines cache favicons separately from page content, so a new icon can take days to weeks to show up in results even after deployment. In [Google Search Console](https://search.google.com/search-console), use **URL Inspection** on your homepage and click **Request Indexing** to speed this up.
+
+---
+
+# Update `robots.txt` and `sitemap.xml`
+
+These two files also live in `public/` and help search engines crawl your site correctly.
+
+**`robots.txt`** tells crawlers what they're allowed to index:
+
+```text
+User-agent: *
+Allow: /
+
+Sitemap: https://[yourdomain.com]/sitemap.xml
+```
+
+**`sitemap.xml`** lists your pages so Google can find them faster:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://[yourdomain.com]/</loc>
+    <lastmod>[YYYY-MM-DD]</lastmod>
+    <priority>1.0</priority>
+  </url>
+</urlset>
+```
+
+Update the domain and date, then submit the sitemap URL under **Sitemaps** in Google Search Console.
 
 ---
 
