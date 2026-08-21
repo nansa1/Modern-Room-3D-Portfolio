@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import Scene from './components/Scene'
 import ContentPanel from './components/ContentPanel'
@@ -63,6 +64,7 @@ export default function App() {
 
       <ContentPanel section={active} onClose={() => setActive(null)} />
       <GameOverlay open={gameOpen} onClose={() => setGameOpen(false)} />
+      <Analytics />
       <SpeedInsights />
     </div>
   )
